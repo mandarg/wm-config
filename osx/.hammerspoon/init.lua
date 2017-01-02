@@ -27,7 +27,7 @@ hs.notify.new({title="Config loaded"})
 
 -- Move window to left half of screen by Ctrl-Alt-Cmd-Left
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
-  local win = hs.window.focusedWindow()
+  local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -41,7 +41,7 @@ end)
 
 -- Move window to right half of screen by Ctrl-Alt-Cmd-Right
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
-  local win = hs.window.focusedWindow()
+  local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -58,7 +58,7 @@ end)
 
 -- Move application to upper third
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
-  local win = hs.window.focusedWindow()
+  local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -72,7 +72,7 @@ end)
 
 -- Center application, i.e. middle third
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
-  local win = hs.window.focusedWindow()
+  local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -86,7 +86,7 @@ end)
 
 -- Move application to bottom third
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
-  local win = hs.window.focusedWindow()
+  local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -106,7 +106,7 @@ end)
 -- screen space
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "o", function()
-  local win = hs.window.focusedWindow()
+  local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -123,5 +123,9 @@ end)
 -- more
 
 hs.hotkey.bind({"cmd", "ctrl"}, "m", function()
-  hs.application.launchOrFocus("Aquamacs")
+      hs.application.launchOrFocus("Aquamacs")
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function()
+      hs.application.launchOrFocus("Firefox")
 end)
