@@ -54,9 +54,12 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
 end)
 
 -- This is for my tallscreen which I use as my primary work screen
--- It is divided into thirds, so...
+-- It is divided into thirds. The following stuff puts things into
+-- different thirds of the screen
 
--- Move application to upper third
+-- Toggle between moving application to upper third, or upper two-thirds
+
+local toggle = 1;
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
   local win = hs.window:focusedWindow()
   local f = win:frame()
@@ -66,7 +69,13 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
   f.x = max.x
   f.y = max.y
   f.w = max.w
-  f.h = max.h / 3
+  if toggle == 1 then
+     f.h = max.h / 3
+     toggle = 0
+  else
+     f.h = 2 * (max.h) / 3
+     toggle = 1
+  end
   win:setFrame(f)
 end)
 
