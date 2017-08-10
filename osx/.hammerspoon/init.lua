@@ -79,7 +79,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
   win:setFrame(f)
 end)
 
--- Center application, i.e. middle third
+-- Move window to bottom third
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
   local win = hs.window:focusedWindow()
   local f = win:frame()
@@ -93,8 +93,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
   win:setFrame(f)
 end)
 
--- Move application to bottom third
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
+-- Move window to middle third
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "l", function()
   local win = hs.window:focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -119,7 +119,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "o", function()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-  
+
   f.x = max.x
   f.y = max.y
   f.w = max.w
@@ -137,4 +137,45 @@ end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function()
       hs.application.launchOrFocus("Firefox")
+end)
+
+-- Move windows spaces right and left with Ctrl-Space-{Left, Right} Arrow
+-- Taken from https://github.com/Hammerspoon/hammerspoon/issues/235#issuecomment-100332943
+-- Note: this does not work across monitors, even with the "Displays Have Separate Spaces"
+-- option turned off in Mission Control. I need to find a solution for that.
+
+function moveWindowOneSpace(direction)
+   local mouseOrigin = hs.mouse.getAbsolutePosition()
+   local win = hs.window.focusedWindow()
+   local clickPoint = win:zoomButtonRect()
+
+   clickPoint.x = clickPoint.x + clickPoint.w + 5
+   clickPoint.y = clickPoint.y + (clickPoint.h / 2)
+
+   local mouseClickEvent = hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.leftmousedown, clickPoint)
+   mouseClickEvent:post()
+   hs.timer.usleep(150000)
+
+   local nextSpaceDownEvent = hs.eventtap.event.newKeyEvent({"ctrl"}, direction, true)
+   nextSpaceDownEvent:post()
+   hs.timer.usleep(150000)
+
+   local nextSpaceUpEvent = hs.eventtap.event.newKeyEvent({"ctrl"}, direction, false)
+   nextSpaceUpEvent:post()
+   hs.timer.usleep(150000)
+
+   local mouseReleaseEvent = hs.eventtap.event.newMouseEvent(hs.eventtap.event.types.leftmouseup, clickPoint)
+   mouseReleaseEvent:post()
+   hs.timer.usleep(150000)
+
+   hs.mouse.setAbsolutePosition(mouseOrigin)
+end
+
+
+hk1 = hs.hotkey.bind({"cmd", "ctrl"}, "right",
+   function() moveWindowOneSpace("right")
+end)
+
+hk2 = hs.hotkey.bind({"cmd", "ctrl"}, "left",
+   function() moveWindowOneSpace("left")
 end)
