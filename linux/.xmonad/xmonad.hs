@@ -17,7 +17,7 @@ myManageHook = composeAll
              [ className =? "Gimp" --> doFloat
              ]
 main = do
-     xmproc <- spawnPipe "/usr/bin/xmobar /home/mandar/.xmobarrc"
+     xmproc <- spawnPipe "/usr/bin/xmobar /home/mandarg/.xmobarrc"
      xmonad $ withUrgencyHook NoUrgencyHook defaultConfig
             { manageHook = manageDocks <+> myManageHook
                                        <+> manageHook defaultConfig
