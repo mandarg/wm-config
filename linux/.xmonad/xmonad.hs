@@ -10,6 +10,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Layout.WindowNavigation
 import XMonad.Actions.WindowGo
 import System.IO
+import Graphics.X11.ExtraTypes.XF86
 
 myWorkspaces = ["code", "shell", "browser", "chat", "vm", "etc"]
 
@@ -32,7 +33,9 @@ main = do
             , terminal = "gnome-terminal --hide-menubar"
             , workspaces = myWorkspaces
             } `additionalKeys`
-            [ ((0, 0x1008FF11), spawn "amixer set Master 2-"),
-              ((0, 0x1008FF13), spawn "amixer set Master 2+")
+            [ ((0, xF86XK_AudioMute), spawn "amixer -D pulse set Master 1+ toggle"),
+              ((0, xF86XK_AudioLowerVolume), spawn "amixer -q sset Master 5%- unmute"),
+              ((0, xF86XK_AudioRaiseVolume), spawn "amixer -q sset Master 5%+ unmute"),
+              ((0, xF86XK_MonBrightnessUp), spawn "lux -a 10%"),
+              ((0, xF86XK_MonBrightnessDown), spawn "lux -s 10%")
             ]
-
