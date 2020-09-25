@@ -128,13 +128,23 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "o", function()
 end)
 
 -- App specific shortcuts
--- I only have Aquamacs at the moment, but plan to add
--- more
 
-hs.hotkey.bind({"cmd", "ctrl"}, "m", function()
-      hs.application.launchOrFocus("Aquamacs")
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function()
+      hs.application.launchOrFocus("Emacs")
 end)
 
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "f", function()
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "p", function()
       hs.application.launchOrFocus("Firefox")
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "k", function()
+      hs.application.launchOrFocus("Google Chrome")
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "i", function()
+      hs.application.launchOrFocus("iTerm")
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ",", function()
+      hs.application.launchOrFocus("Slack")
 end)
