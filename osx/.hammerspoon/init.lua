@@ -99,7 +99,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "l", function()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-  
+
   f.x = max.x
   f.y = max.y + (max.h / 3)
   f.w = max.w
@@ -148,3 +148,8 @@ end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, ",", function()
       hs.application.launchOrFocus("Slack")
 end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "l", function()
+      hs.application.launchOrFocus("Microsoft Teams")
+end)
+
